@@ -19,3 +19,13 @@ resource "aws_subnet" "second-subnet" {
     Name = "second"
   }
 }
+
+resource "aws_internet_gateway" "igw" {
+    vpc_id = aws_vpc.web-server-vpc.id
+}
+
+resource "aws_instance" "web-server" {
+  ami           = "ami-09439f09c55136ecf" 
+  instance_type = "t2.micro"
+  subnet_id = aws_subnet.first-subnet.id
+}
